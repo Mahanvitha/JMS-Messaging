@@ -1,0 +1,45 @@
+package com.quotes.producer;
+
+import javax.jms.JMSContext;
+import javax.jms.JMSProducer;
+import javax.jms.Queue;
+import javax.naming.NamingException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.quotes.consumer.UserRegistration;
+import com.quotes.jndi.JndiService;
+
+public class RegisterUser {
+
+	private JndiService jndiService;
+	private String factoryName;
+	private String queueName;
+	public RegisterUser(JndiService jndiService, String factoryName, String queueName) throws NamingException {
+		super();
+		this.jndiService = jndiService;
+		this.factoryName = factoryName;
+		this.queueName = queueName;
+		
+	jndiService.startConnections(factoryName);
+	}
+
+public void sendMessage(JMSContext context,UserRegistration userRegistration){
+		try {
+			Queue queue = (Queue) jndiService.getInitialContext().lookup(queueName);
+			JMSProducer producer = context.createProducer();
+		
+			ObjectMapper mapper = new ObjectMapper();
+			String userRegJson = mapper.writeValueAsString(userRegistration);
+		
+			producer.send(queue, userRegJson);
+		
+		} catch (NamingException e) {
+
+			e.printStackTrace();
+		}
+		catch(JsonProcessingException e){
+			e.printStackTrace();
+		}
+		}
+}

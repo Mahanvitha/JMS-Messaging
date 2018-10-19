@@ -1,0 +1,29 @@
+package com.quotes.jndi;
+
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
+import javax.naming.InitialContext;
+
+public class QuotesJndi implements JndiService {
+
+	public ConnectionFactory getConnectionFactory() {
+	
+		return null;
+	}
+
+	public InitialContext getInitialContext() {
+		
+		return null;
+	}
+
+	public boolean startConnections() {
+		
+		return false;
+	}
+
+	public JMSContext getContext() {
+	
+		return null;
+	}
+
+}

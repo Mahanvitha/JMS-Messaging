@@ -1,0 +1,9 @@
+package com.quotes.messages.userregistration;
+
+public class UserRegistration {
+	public String name;
+	public String password;
+	public boolean deliveryMode;
+	public int timeToLive;
+	
+}

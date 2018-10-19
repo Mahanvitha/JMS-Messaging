@@ -1,0 +1,32 @@
+package com.quotes.producer;
+
+import javax.jms.JMSContext;
+import javax.jms.Queue;
+import javax.naming.NamingException;
+
+import com.quotes.consumer.UserRegistration;
+import com.quotes.jndi.JndiService;
+
+public class RegisterUser {
+
+	private JndiService jndiService;
+	private String factoryName;
+	private String queueName;
+	public RegisterUser(JndiService jndiService, String factoryName, String queueName) throws NamingException {
+		super();
+		this.jndiService = jndiService;
+		this.factoryName = factoryName;
+		this.queueName = queueName;
+		
+	jndiService.startConnections(factoryName);
+	}
+
+public void sendMessage(JMSContext context,UserRegistration userRegistration){
+		try {
+			Queue queue = (Queue) jndiService.getInitialContext().lookup(queueName);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+}

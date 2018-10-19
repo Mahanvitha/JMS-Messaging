@@ -1,0 +1,5 @@
+package com.quotes.consumer;
+
+public class UserRegistration {
+
+}

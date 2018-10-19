@@ -1,0 +1,40 @@
+package com.capgemini;
+
+import javax.naming.InitialContext;
+
+import org.glassfish.grizzly.http.server.naming.NamingException;
+
+import com.sun.corba.ee.spi.transport.Connection;
+import com.sun.jdo.api.persistence.support.ConnectionFactory;
+import com.sun.messaging.Queue;
+import com.sun.messaging.jmq.jmsserver.core.Session;
+
+public class sender {
+
+	public static void main(String[] args) {
+		if(args.length==0) {
+			System.out.println("Must suplly a message");
+			System.out.println("From maven run with maven Pargs=\"Hello World\" run");
+			return;
+		}else {
+			System.out.println(args[0]);
+		}
+		ConnectionFactory connectionFactory;
+		Connection connection = null;
+		}
+		try {
+			InitialContext initialcontext = new InitialContext();
+			Queue queue =(Queue) initailContext.lookup(name:"jms/P2PQueue");
+			ConnectionFactory = (QueueConnectionFactory)
+					InitialContext.doLookup(name:"jms/_defaultConnectionFactory");
+			connection = connectionFactory.createConnection();
+			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+				
+	} 
+		catch(NamingException e) {
+			e.printStackTrace();
+		}
+	 
+}
+}
+

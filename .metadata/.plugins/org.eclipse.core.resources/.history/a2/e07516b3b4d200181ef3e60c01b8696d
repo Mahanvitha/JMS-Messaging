@@ -1,0 +1,13 @@
+package com.quotes.jndi;
+
+import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
+import javax.naming.InitialContext;
+
+public interface JndiService {
+
+	public ConnectionFactory getConnectionFactory();
+	public InitialContext getInitialContext();
+	public boolean startConnections();
+	public JMSContext getContext();
+}

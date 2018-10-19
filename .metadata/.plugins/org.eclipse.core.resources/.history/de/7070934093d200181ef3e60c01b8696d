@@ -1,0 +1,28 @@
+package com.capgemini;
+
+import java.sql.Connection;
+import java.util.Queue;
+
+import javax.jms.ConnectionFactory;
+import javax.naming.InitialContext;
+
+import com.sun.messaging.jms.JMSException;
+
+public class Sender {
+
+	public static void main(String[] args) {
+		
+		ConnectionFactory connectionFactory ;
+		Connection connection  = null;
+		
+		try {
+			InitialContext initialContext = new InitialContext();
+			Queue queue =(Queue) initialContext.lookup("jms/P2PQueue");
+			connectionFactory = (ConnectionFactory) InitialContext.doLookup("jms/__defaultConnectionFactory");
+	}
+		catch(NamingException | JMSException e) {
+			e.printStackTrace();
+		}
+		
+		
+}
